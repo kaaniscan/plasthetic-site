@@ -228,6 +228,9 @@ function reinitPage() {
   // Re-init product back button
   initProductBack();
 
+  // Re-init filters
+  initFilters();
+
   // Re-init stagger
   const items = document.querySelectorAll('.object-card, .home-product');
   items.forEach((item, i) => {
@@ -347,15 +350,15 @@ document.addEventListener('DOMContentLoaded', initCarousel);
 // --- Product Back Button ---
 function initProductBack() {
   document.querySelectorAll('.product-back').forEach(function(btn) {
-    // Always re-bind: clone to remove old listeners, then add fresh one
-    const newBtn = btn.cloneNode(true);
-    newBtn.removeAttribute('data-back-init');
-    newBtn.addEventListener('click', function(e) {
+    if (btn.dataset.backInit) return;
+    btn.dataset.backInit = '1';
+    btn.addEventListener('click', function(e) {
       e.preventDefault();
       e.stopPropagation();
-      window.history.back();
+      // Always navigate to objects page
+      const isInProducts = window.location.pathname.includes('/products/');
+      window.location.href = isInProducts ? '../objects.html' : 'objects.html';
     });
-    btn.replaceWith(newBtn);
   });
 }
 document.addEventListener('DOMContentLoaded', initProductBack);
@@ -384,6 +387,25 @@ function initParallax() {
   update();
 }
 document.addEventListener('DOMContentLoaded', initParallax);
+
+// --- Object Filters ---
+function initFilters() {
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const filter = btn.dataset.filter;
+      document.querySelectorAll('.object-card').forEach(card => {
+        if (filter === 'all' || card.dataset.category === filter) {
+          card.classList.remove('hidden');
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+    });
+  });
+}
+document.addEventListener('DOMContentLoaded', initFilters);
 
 // --- Pen Cursor & Drawing Trail ---
 (function() {

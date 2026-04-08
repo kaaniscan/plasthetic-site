@@ -152,23 +152,6 @@
   </main>
 
   <script src="https://unpkg.com/lenis@1.3.20/dist/lenis.min.js"></script>
-  <script src="js/main.js?v=6"></script>
-  <script>
-    // Filter system
-    document.querySelectorAll('.filter-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        const filter = btn.dataset.filter;
-        document.querySelectorAll('.object-card').forEach(card => {
-          if (filter === 'all' || card.dataset.category === filter) {
-            card.classList.remove('hidden');
-          } else {
-            card.classList.add('hidden');
-          }
-        });
-      });
-    });
-  </script>
+  <script src="js/main.js?v=7"></script>
 </body>
 </html>
