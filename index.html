@@ -115,13 +115,12 @@
       width: 24px;
       height: 24px;
       flex-shrink: 0;
+      overflow: hidden;
     }
 
-    .video-hero-dot img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      display: block;
+    .video-hero-dot .topbar-dot-sprite {
+      background-image: url('Library/Product_Icons/icons_sprite.png');
+      filter: brightness(0) invert(1);
     }
 
 
@@ -221,7 +220,7 @@
       <div class="nav-toggle">
         <span></span><span></span><span></span>
       </div>
-      <div class="topbar-dot"><img src="Library/Product_Icons/icons_rotating.gif" alt=""></div>
+      <div class="topbar-dot"><span class="topbar-dot-sprite"></span></div>
     </div>
   </header>
 
@@ -248,7 +247,7 @@
           <li><a href="about.html" data-text="3.Information"><span class="nav-num">3.</span>Information</a></li>
         </ul>
         <div class="video-hero-toggle nav-toggle"><span></span><span></span><span></span></div>
-        <div class="video-hero-dot"><img src="Library/Product_Icons/icons_rotating.gif" alt=""></div>
+        <div class="video-hero-dot"><span class="topbar-dot-sprite"></span></div>
       </div>
     </div>
 

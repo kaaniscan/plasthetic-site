@@ -257,13 +257,19 @@ button {
   width: 24px;
   height: 24px;
   flex-shrink: 0;
+  overflow: hidden;
 }
 
-.topbar-dot img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
+.topbar-dot-sprite {
   display: block;
+  width: 144px; /* 24px * 6 frames */
+  height: 24px;
+  background: url('../Library/Product_Icons/icons_sprite.png') left center / 144px 24px no-repeat;
+  animation: sprite-rotate 4.8s steps(6) infinite; /* 6 frames, 800ms each */
+}
+
+@keyframes sprite-rotate {
+  to { transform: translateX(-144px); }
 }
 
 /* Mobile toggle */
