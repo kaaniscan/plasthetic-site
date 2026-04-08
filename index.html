@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Plasthetic.s — Sculptural Objects</title>
+    <link rel="icon" href="favicon.ico" sizes="any">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/lenis@1.3.20/dist/lenis.css">
+  <link rel="stylesheet" href="css/style.css?v=6">
+  <style>
+    /* --- Video Hero (landing) — FULLSCREEN --- */
+    .video-hero {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .video-hero video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .video-hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.15);
+      z-index: 2;
+    }
+
+    .video-hero-nav {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 10;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.4rem 2.5rem;
+    }
+
+    .video-hero-left {
+      display: flex;
+      align-items: center;
+      gap: clamp(2rem, 4vw, 5rem);
+    }
+
+    .video-hero-logo {
+      height: clamp(20px, 2.5vw, 28px);
+      display: block;
+    }
+
+    .video-hero-tagline {
+      font-family: var(--font-body);
+      font-size: clamp(1rem, 1.3vw, 1.2rem);
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      color: rgba(255,255,255,0.7);
+    }
+
+    .video-hero-meta-info {
+      display: flex;
+      gap: clamp(1.5rem, 3vw, 3rem);
+      font-size: clamp(1rem, 1.3vw, 1.2rem);
+      font-weight: 500;
+      color: rgba(255,255,255,0.7);
+    }
+
+    .video-hero-meta-info .hero-time {
+      font-variant-numeric: tabular-nums;
+      letter-spacing: 0.08em;
+    }
+
+    .video-hero-right {
+      display: flex;
+      align-items: center;
+      gap: clamp(1.5rem, 3vw, 3rem);
+    }
+
+    .video-hero-links {
+      display: flex;
+      gap: clamp(1.5rem, 2.5vw, 2.5rem);
+      list-style: none;
+      font-size: clamp(1rem, 1.3vw, 1.2rem);
+      font-weight: 600;
+      color: #fff;
+    }
+
+    .video-hero-links a {
+      color: #fff;
+      transition: opacity 0.3s ease;
+    }
+
+    .video-hero-links a:hover {
+      opacity: 0.5;
+    }
+
+    .video-hero-links .nav-num {
+      font-family: var(--font-body);
+      font-weight: 400;
+      font-size: clamp(0.9rem, 1.15vw, 1.05rem);
+      opacity: 0.5;
+      margin-right: 0.2rem;
+    }
+
+    .video-hero-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #fff;
+      flex-shrink: 0;
+    }
+
+
+    .video-hero-scroll {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 5;
+      color: rgba(255,255,255,0.3);
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .video-hero-scroll::after {
+      content: '';
+      width: 1px;
+      height: 24px;
+      background: rgba(255,255,255,0.3);
+      animation: scrollPulse 2s ease infinite;
+    }
+
+    @keyframes scrollPulse {
+      0%, 100% { transform: scaleY(1); opacity: 0.5; }
+      50% { transform: scaleY(0.4); opacity: 0.2; }
+    }
+
+    /* Topbar hidden behind video hero */
+    .topbar {
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+    .topbar.visible {
+      opacity: 1;
+    }
+
+    .video-hero-toggle {
+      display: none;
+    }
+
+    @media (max-width: 768px) {
+      .video-hero-nav {
+        padding: 1rem 1.5rem;
+      }
+      .video-hero-tagline,
+      .video-hero-meta-info {
+        display: none;
+      }
+      .video-hero-links {
+        display: none;
+      }
+      .video-hero-dot {
+        display: none;
+      }
+      .video-hero-toggle {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        cursor: pointer;
+        z-index: 101;
+      }
+      .video-hero-toggle span {
+        display: block;
+        width: 24px;
+        height: 1.5px;
+        background: #fff;
+        transition: all 0.3s ease;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="page-transition"></div>
+
+  <header class="topbar" id="mainTopbar">
+    <div class="topbar-left">
+      <a href="index.html" class="topbar-brand">
+        <img src="Library/Logo/PS_Logo_Short_Black.png" alt="Plasthetic.s" class="topbar-brand-logo">
+      </a>
+      <span class="topbar-tagline">Sculptural Objects</span>
+    </div>
+    <div class="topbar-right">
+      <nav>
+        <ul class="topbar-nav">
+          <li><a href="index.html" class="active" data-text="1.Home"><span class="nav-num">1.</span>Home</a></li>
+          <li><a href="objects.html" data-text="2.Objects"><span class="nav-num">2.</span>Objects</a></li>
+          <li><a href="about.html" data-text="3.Information"><span class="nav-num">3.</span>Information</a></li>
+        </ul>
+      </nav>
+      <div class="nav-toggle">
+        <span></span><span></span><span></span>
+      </div>
+      <div class="topbar-dot"></div>
+    </div>
+  </header>
+
+  <main id="page-content">
+
+  <!-- Video Hero (Landing) — FULLSCREEN -->
+  <section class="video-hero" id="videoHero">
+    <video autoplay muted loop playsinline>
+      <source src="Library/Cover/Cover_Animation_3.mp4" type="video/mp4">
+    </video>
+    <div class="video-hero-overlay"></div>
+
+    <div class="video-hero-nav">
+      <div class="video-hero-left">
+        <a href="index.html">
+          <img src="Library/Logo/PS_Logo_Short_White.png" alt="Plasthetic.s" class="video-hero-logo">
+        </a>
+        <span class="video-hero-tagline">Sculptural Objects</span>
+      </div>
+      <div class="video-hero-right">
+        <ul class="video-hero-links">
+          <li><a href="index.html" class="active" data-text="1.Home"><span class="nav-num">1.</span>Home</a></li>
+          <li><a href="objects.html" data-text="2.Objects"><span class="nav-num">2.</span>Objects</a></li>
+          <li><a href="about.html" data-text="3.Information"><span class="nav-num">3.</span>Information</a></li>
+        </ul>
+        <div class="video-hero-toggle nav-toggle"><span></span><span></span><span></span></div>
+        <div class="video-hero-dot"></div>
+      </div>
+    </div>
+
+  </section>
+
+  </main>
+
+  <script src="https://unpkg.com/lenis@1.3.20/dist/lenis.min.js"></script>
+  <script src="js/main.js?v=6"></script>
+  <script>
+    // Show topbar after scrolling past video hero
+    (function() {
+      const topbar = document.getElementById('mainTopbar');
+      const hero = document.getElementById('videoHero');
+      if (!topbar || !hero) return;
+
+      function checkScroll() {
+        const heroBottom = hero.offsetTop + hero.offsetHeight;
+        topbar.classList.toggle('visible', window.scrollY > heroBottom - 60);
+      }
+
+      window.addEventListener('scroll', checkScroll, { passive: true });
+      checkScroll();
+    })();
+
+    // Hero time
+    (function() {
+      const el = document.querySelector('.hero-time');
+      if (!el) return;
+      function update() {
+        const now = new Date();
+        el.textContent = String(now.getHours()).padStart(2,'0') + ':' + String(now.getMinutes()).padStart(2,'0');
+      }
+      update();
+      setInterval(update, 10000);
+    })();
+  </script>
+</body>
+</html>

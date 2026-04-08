@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "plasthetic",
+      "runtimeExecutable": "python",
+      "runtimeArgs": ["-m", "http.server", "3000", "--directory", "S:/Dev/Design/plasthetic-site"],
+      "port": 3000
+    }
+  ]
+}
