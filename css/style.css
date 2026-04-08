@@ -523,34 +523,50 @@ button {
 }
 
 .gallery-counter {
-  position: absolute;
-  bottom: 1.5rem;
-  left: 1.5rem;
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  letter-spacing: 0.1em;
-  color: var(--black);
-  opacity: 0.5;
+  display: none;
 }
 
 .gallery-nav {
   position: absolute;
-  bottom: 1.5rem;
-  right: 1.5rem;
+  top: 50%;
+  left: 0;
+  right: 0;
+  transform: translateY(-50%);
   display: flex;
-  gap: 1.5rem;
+  justify-content: space-between;
+  padding: 0 1.2rem;
+  pointer-events: none;
+  z-index: 5;
+  mix-blend-mode: difference;
 }
 
 .gallery-nav button {
-  font-family: var(--font-body);
-  font-size: 0.75rem;
-  font-weight: 500;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--black);
-  opacity: 0.5;
+  pointer-events: auto;
+  font-size: 0;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  opacity: 0.6;
   transition: opacity 0.3s ease;
-  padding: 0.3rem;
+  padding: 0;
+  background: none;
+  border: none;
+}
+
+.gallery-nav button::before {
+  font-size: 1.4rem;
+  line-height: 1;
+}
+
+.gallery-prev::before {
+  content: '‹';
+}
+
+.gallery-next::before {
+  content: '›';
 }
 
 .gallery-nav button:hover {
@@ -568,33 +584,32 @@ button {
 /* Back button on product pages */
 .product-back {
   position: fixed;
-  top: 1.15rem;
-  left: calc(54.55% + 2.5rem); /* right panel starts at ~54.55% (1.2fr / 2.2fr) */
+  top: 1.4rem;
+  left: calc(54.55% + 2.5rem);
   display: inline-flex;
   align-items: center;
-  gap: 0.4rem;
-  padding: 0.45rem 1.4rem;
-  border: 1.5px solid rgba(0,0,0,0.2);
+  gap: 0.3rem;
+  padding: 0.2rem 1rem;
+  border: 1px solid rgba(255,255,255,0.3);
   border-radius: 100px;
   font-family: var(--font-body);
-  font-size: 0.75rem;
-  font-weight: 500;
-  letter-spacing: 0.06em;
-  color: var(--black);
-  background: var(--bg);
+  font-size: clamp(0.8rem, 1vw, 0.95rem);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: #fff;
+  background: transparent;
+  mix-blend-mode: difference;
   transition: all 0.3s ease, opacity 0.3s ease;
   z-index: 101;
 }
 
 .product-back:hover {
-  border-color: var(--black);
-  background: var(--black);
-  color: var(--bg);
+  border-color: rgba(255,255,255,0.6);
 }
 
 .product-back::before {
   content: '←';
-  font-size: 0.85rem;
+  font-size: 0.9rem;
   transition: transform 0.3s ease;
 }
 
@@ -1245,9 +1260,7 @@ a, button, .filter-btn, .nav-toggle, .gallery-nav button, .product-back {
   }
 
   .product-back {
-    position: fixed;
-    left: 1.5rem;
-    top: 1rem;
+    display: none;
   }
 
   .objects-grid {
@@ -1400,6 +1413,10 @@ a, button, .filter-btn, .nav-toggle, .gallery-nav button, .product-back {
 
   .carousel-item {
     width: 260px;
+  }
+
+  .product-back {
+    display: none;
   }
 
   .footer-top {
