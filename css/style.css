@@ -254,11 +254,16 @@ button {
 }
 
 .topbar-dot {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background: #fff;
+  width: 24px;
+  height: 24px;
   flex-shrink: 0;
+}
+
+.topbar-dot img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
 }
 
 /* Mobile toggle */
