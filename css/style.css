@@ -266,6 +266,7 @@ button {
   height: 24px;
   background: url('../Library/Product_Icons/icons_sprite.png') left center / 144px 24px no-repeat;
   animation: sprite-rotate 4.8s steps(6) infinite; /* 6 frames, 800ms each */
+  filter: brightness(0) invert(1); /* white sprite for mix-blend-mode: difference */
 }
 
 @keyframes sprite-rotate {
@@ -599,11 +600,13 @@ button {
   color: #fff;
   background: transparent;
   mix-blend-mode: difference;
+  opacity: 0.5;
   transition: all 0.3s ease, opacity 0.3s ease;
   z-index: 101;
 }
 
 .product-back:hover {
+  opacity: 1;
   border-color: rgba(255,255,255,0.6);
 }
 
