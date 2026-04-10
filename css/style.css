@@ -1196,12 +1196,8 @@ footer {
 }
 
 /* --- Pen Cursor & Drawing Trail --- */
-body {
-  cursor: none;
-}
-
-a, button, .filter-btn, .nav-toggle, .gallery-nav button, .product-back {
-  cursor: none;
+body, body * {
+  cursor: none !important;
 }
 
 .pen-cursor {
@@ -1214,14 +1210,16 @@ a, button, .filter-btn, .nav-toggle, .gallery-nav button, .product-back {
   transition: opacity 0.2s ease, z-index 0s;
 }
 
-.pen-cursor.behind {
-  z-index: 1;
-}
-
 .pen-cursor img {
   width: 100%;
   height: 100%;
   object-fit: contain;
+  transition: filter 0.2s ease;
+}
+
+/* Clickable element: orange pen → dark pen */
+.pen-cursor.clickable img {
+  filter: brightness(0);
 }
 
 .pen-canvas {

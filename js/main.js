@@ -446,14 +446,12 @@ document.addEventListener('DOMContentLoaded', initFilters);
     cursor.style.top = mouseY + 'px';
     cursor.style.opacity = '1';
 
-    // Detect clickable elements — cursor goes behind them
+    // Detect clickable elements — switch to dark cursor
     const target = e.target.closest('a, button, .filter-btn, .object-card, .home-product, .carousel-item');
     if (target) {
-      cursor.classList.add('behind');
-      canvas.classList.add('behind');
+      cursor.classList.add('clickable');
     } else {
-      cursor.classList.remove('behind');
-      canvas.classList.remove('behind');
+      cursor.classList.remove('clickable');
     }
 
     // Only record trail when pen is down (mouse pressed)
@@ -484,6 +482,7 @@ document.addEventListener('DOMContentLoaded', initFilters);
   document.addEventListener('mousedown', (e) => {
     // Don't draw on clickable elements
     if (e.target.closest('a, button, .filter-btn, .nav-toggle, .gallery-nav button, .product-back')) return;
+    e.preventDefault(); // prevent text selection while drawing
     isPenDown = true;
     lastDrawX = null;
     lastDrawY = null;
@@ -495,6 +494,11 @@ document.addEventListener('DOMContentLoaded', initFilters);
     isPenDown = false;
     lastDrawX = null;
     lastDrawY = null;
+  });
+
+  // Prevent drag selection while drawing
+  document.addEventListener('dragstart', (e) => {
+    if (isPenDown) e.preventDefault();
   });
 
   function draw() {
