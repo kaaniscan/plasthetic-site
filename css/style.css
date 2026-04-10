@@ -1207,14 +1207,22 @@ body, body * {
   width: 32px;
   height: 32px;
   transform: translate(-4px, -28px);
-  transition: opacity 0.2s ease, z-index 0s;
+  transition: opacity 0.2s ease;
 }
 
 .pen-cursor img {
   width: 100%;
   height: 100%;
   object-fit: contain;
-  transition: filter 0.2s ease;
+  transform-origin: left bottom;
+  transform: rotate(0deg);
+  transition: filter 0.2s ease, transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Writing state: pen tilts right */
+.pen-cursor.writing img {
+  transform: rotate(15deg);
+  transition: filter 0.2s ease, transform 0.15s ease-out;
 }
 
 /* Clickable element: orange pen → dark pen */

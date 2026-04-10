@@ -438,6 +438,7 @@ document.addEventListener('DOMContentLoaded', initFilters);
   let mouseX = -100, mouseY = -100;
   let lastDrawX = null, lastDrawY = null;
   let isPenDown = false; // only draw when mouse is pressed
+  let moveTimer;
 
   document.addEventListener('mousemove', (e) => {
     mouseX = e.clientX;
@@ -453,6 +454,16 @@ document.addEventListener('DOMContentLoaded', initFilters);
     } else {
       cursor.classList.remove('clickable');
     }
+
+    // Pen tilt: writing when drawing, idle tilt on stop
+    if (isPenDown) {
+      cursor.classList.add('writing');
+    }
+    // Reset idle timer — pen returns upright after stopping
+    clearTimeout(moveTimer);
+    moveTimer = setTimeout(() => {
+      cursor.classList.remove('writing');
+    }, 120);
 
     // Only record trail when pen is down (mouse pressed)
     if (isPenDown) {
@@ -484,6 +495,7 @@ document.addEventListener('DOMContentLoaded', initFilters);
     if (e.target.closest('a, button, .filter-btn, .nav-toggle, .gallery-nav button, .product-back')) return;
     e.preventDefault(); // prevent text selection while drawing
     isPenDown = true;
+    cursor.classList.add('writing');
     lastDrawX = null;
     lastDrawY = null;
     points.push(null); // break from previous stroke
@@ -492,6 +504,7 @@ document.addEventListener('DOMContentLoaded', initFilters);
   // Pen up — stop drawing
   document.addEventListener('mouseup', () => {
     isPenDown = false;
+    cursor.classList.remove('writing');
     lastDrawX = null;
     lastDrawY = null;
   });
